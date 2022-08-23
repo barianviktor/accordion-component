@@ -1,0 +1,38 @@
+<div class="accordion">
+  <div
+    [class.selected-item]="i == selectedIndex"
+    class="accordion-item"
+    *ngFor="let item of items; let i = index"
+  >
+    <div
+      (mouseenter)="hover = i"
+      (mouseleave)="hover = -1"
+      [ngStyle]="{
+        backgroundColor:
+          hover != i
+            ? color.titleBackgroundColor
+            : color.titleBackgroundColorHover,
+        color: color.titleColor
+      }"
+      (click)="onSelect(i)"
+      class="accordion-item-header"
+    >
+      <span>{{ item.title }}</span>
+      <span class="icon" [class.icon-selected]="selectedIndex == i"
+        ><fa-icon [icon]="faAngleDown"></fa-icon>
+      </span>
+    </div>
+    <div
+      [ngStyle]="{
+        backgroundColor: color.detailsBackgroundColor,
+        color: color.detailsColor
+      }"
+      class="accordion-main-container"
+      [ngClass]="i == selectedIndex ? 'selected' : 'not-selected'"
+    >
+      <div class="accordion-item-description">
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
